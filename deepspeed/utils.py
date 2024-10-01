@@ -104,7 +104,7 @@ class DSPipeline():
                          do_sample=False):
         generate_kwargs = dict(max_new_tokens=num_tokens, do_sample=do_sample)
 
-        input_tokens = self.tokenizer.batch_encode_plus(inputs, return_tensors="pt", padding=True).to(self.device)
+        input_tokens = self.tokenizer(inputs, return_tensors="pt", padding=True).to(self.device)
         self.model.cuda().to(self.device)
 
         outputs = self.model.generate(**input_tokens, **generate_kwargs)
